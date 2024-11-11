@@ -87,19 +87,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MoveLeft",
-                    "type": "Button",
-                    "id": "90e7036c-b4df-4efe-8867-1c401cf3f6ce",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MoveRight",
-                    "type": "Button",
-                    "id": "e276eaa5-6f4d-407d-b951-c6fe296c7f2b",
-                    "expectedControlType": "",
+                    "name": "Movement",
+                    "type": "PassThrough",
+                    "id": "708a6df3-fa54-4bfb-9ddb-a47b2b6f9eb0",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -492,48 +483,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "0bea5c94-8353-4cfe-8a03-0e7401871eae",
+                    "name": "2D Vector",
+                    "id": "7e7611e9-b3c5-408a-8cf6-723652cd0305",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "15be307d-c65e-4e12-b805-4f4095aa5faf",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "50464ad2-62a5-483e-a9bf-6d0c9f74c9ab",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "725a41af-076e-4e1e-afca-aa6351645ce3",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "MoveLeft",
+                    "groups": "",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "ea4052ec-09da-41ee-bc89-a1a3685c22c5",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "MoveLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c45a621a-d8c5-4097-9746-7e161114cfb8",
+                    "name": "right",
+                    "id": "dc4434b0-5a2e-44f3-af03-d251994fe728",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "MoveRight",
+                    "groups": "",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "80e9d892-724a-46af-8a2b-33b4e25f7c69",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "MoveRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         },
