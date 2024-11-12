@@ -12,8 +12,18 @@ public class PlayerPaddle : MonoBehaviour
 
     private float moveDirection = 0;
 
+    private bool _active;
+    private Vector2 _initialPosition;
+
     private void Start()
     {
+        EventController.GameStart += OnGameStart;
+        EventController.LifeEnd += OnLifeEnd;
+        EventController.GameReset += GameReset;
+        
+        
+        _initialPosition = transform.position;
+
         InitializeControls();
     }
 
@@ -21,6 +31,10 @@ public class PlayerPaddle : MonoBehaviour
     private void OnDestroy()
     {
         ReleaseControls();
+        EventController.GameStart -= OnGameStart;
+        EventController.LifeEnd -= OnLifeEnd;
+        EventController.GameReset -= GameReset;
+
     }
 
 
@@ -33,7 +47,6 @@ public class PlayerPaddle : MonoBehaviour
 
         _playerInputMap.Movement.performed += MoveLeft;
         _playerInputMap.Movement.canceled += MoveLeft;
-
     }
 
     private void ReleaseControls()
@@ -44,6 +57,7 @@ public class PlayerPaddle : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!_active) return;
         if (moveDirection != 0)
         {
             transform.Translate(Vector2.right * (moveDirection * speed * Time.deltaTime));
@@ -64,5 +78,19 @@ public class PlayerPaddle : MonoBehaviour
         }
     }
 
- 
+    private void OnGameStart()
+    {
+        _active = true;
+    }
+
+    private void OnLifeEnd()
+    {
+        _active = false;
+        transform.position = _initialPosition;
+    }
+
+    private void GameReset()
+    {
+        transform.position = _initialPosition;
+    }
 }
