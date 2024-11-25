@@ -1,28 +1,36 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
-public class StartPrompt : MonoBehaviour, IPointerClickHandler
+public class StartPrompt : MonoBehaviour
 {
-    public void OnPointerClick(PointerEventData eventData)
+    private Keyboard _keyboard;
+
+    void Start()
     {
-        OnGameStart();
+        _keyboard = Keyboard.current;
     }
 
-    private void Start()
+    private void Update()
     {
-      //  EventController.LifeEnd += OnLifeEnd;
-    }
-
-    private void OnDestroy()
-    { 
-       // EventController.LifeEnd -= OnLifeEnd;
+        if (_keyboard.spaceKey.wasPressedThisFrame)
+        {
+            OnGameStart();
+        }
     }
 
     private void OnGameStart()
     {
         gameObject.SetActive(false);
         EventController.GameStart?.Invoke();
+    }
+
+    public void GameStart()
+    {
+        gameObject.SetActive(true);
     }
 
     public void OnLifeEnd()

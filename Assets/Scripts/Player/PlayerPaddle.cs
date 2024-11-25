@@ -19,7 +19,7 @@ public class PlayerPaddle : MonoBehaviour
     {
         EventController.GameStart += OnGameStart;
         EventController.LifeEnd += OnLifeEnd;
-        EventController.GameReset += GameReset;
+        EventController.GameReset += ResetPaddle;
         
         
         _initialPosition = transform.position;
@@ -33,7 +33,7 @@ public class PlayerPaddle : MonoBehaviour
         ReleaseControls();
         EventController.GameStart -= OnGameStart;
         EventController.LifeEnd -= OnLifeEnd;
-        EventController.GameReset -= GameReset;
+        EventController.GameReset -= ResetPaddle;
 
     }
 
@@ -89,7 +89,7 @@ public class PlayerPaddle : MonoBehaviour
         transform.position = _initialPosition;
     }
 
-    private void GameReset()
+    public void ResetPaddle()
     {
         transform.position = _initialPosition;
     }

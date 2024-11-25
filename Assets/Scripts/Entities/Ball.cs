@@ -38,7 +38,7 @@ public class Ball : MonoBehaviour
         rb2d.AddForce(randomUpwardsVelocty * initialForce, ForceMode2D.Impulse);
     }
 
-    private void ResetBall()
+    public void ResetBall()
     {
         rb2d.linearVelocity = Vector2.zero;
         transform.position = initialPosition;
