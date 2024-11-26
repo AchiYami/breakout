@@ -1,13 +1,11 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Controller
 {
     public class AudioController : MonoBehaviour
     {
-        [FormerlySerializedAs("audioSource")] [FoldoutGroup("Sources")] [SerializeField]
+        [FoldoutGroup("Sources")] [SerializeField]
         private AudioSource soundEffectAudioSource;
 
         [FoldoutGroup("Sources")] [SerializeField]
