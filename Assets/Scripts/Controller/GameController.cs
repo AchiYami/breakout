@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour
     [FoldoutGroup("Audio")] [SerializeField]
     private AudioClip loseLifeClip;
 
+    [FoldoutGroup("Audio")] [SerializeField]
+    private AudioSource musicSource;
 
     [FoldoutGroup("Options")] [SerializeField]
     private bool gainLifeViaScore;
@@ -128,6 +130,8 @@ public class GameController : MonoBehaviour
         }
 
         levels[currentLevel].Reset();
+        musicSource.clip = levels[currentLevel].levelMusic;
+        musicSource.Play();
     }
 
     private void GainLife()

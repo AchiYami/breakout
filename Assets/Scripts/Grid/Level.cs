@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class Level : MonoBehaviour
 {
     [SerializeField] private List<Brick> bricks;
-
+    [SerializeField] public AudioClip levelMusic;
     [SerializeField] public int BricksRemaining;
     public bool LevelClear => bricks.Count(x => x.gameObject.activeSelf) <= 0;
 
