@@ -64593,11 +64593,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5393224647798095538, guid: 8198c5d4ae376b5489bb71b56f7691c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: -5.75
       objectReference: {fileID: 0}
     - target: {fileID: 5393224647798095538, guid: 8198c5d4ae376b5489bb71b56f7691c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0027001635
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5393224647798095538, guid: 8198c5d4ae376b5489bb71b56f7691c1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64792,7 +64792,7 @@ MonoBehaviour:
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
