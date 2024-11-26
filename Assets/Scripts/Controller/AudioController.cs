@@ -1,35 +1,76 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class AudioController : MonoBehaviour
+namespace Controller
 {
-    
-    [SerializeField]
-    private AudioSource source;
-
-    [SerializeField] private AudioClip clip;
-    
-    private void Start()
+    public class AudioController : MonoBehaviour
     {
-        EventController.GameStart += GameStart;
-        EventController.LifeEnd += LifeEnd;
-    }
+        [FormerlySerializedAs("audioSource")] [FoldoutGroup("Sources")] [SerializeField]
+        private AudioSource soundEffectAudioSource;
 
-    private void OnDestroy()
-    {
-        EventController.GameStart -= GameStart;
-        EventController.LifeEnd -= LifeEnd;
-    }
+        [FoldoutGroup("Sources")] [SerializeField]
+        private AudioSource musicAudioSource;
 
+        [FoldoutGroup("Sources")] [SerializeField]
+        private AudioSource playerEffectAudioSource;
 
-    private void GameStart()
-    {
-        source.clip = clip;
-        source.Play();
-    }
+        [FoldoutGroup("Effects")] [FoldoutGroup("Effects/Game")] [SerializeField]
+        private AudioClip nextLevelClip;
 
-    private void LifeEnd()
-    {
-        source.Stop();
+        [FoldoutGroup("Effects")] [FoldoutGroup("Effects/Game")] [SerializeField]
+        private AudioClip gainLifeClip;
+
+        [FoldoutGroup("Effects")] [FoldoutGroup("Effects/Game")] [SerializeField]
+        private AudioClip loseLifeClip;
+
+        //Audio Clip - When the ball hits a brick
+        [FoldoutGroup("Effects")] [FoldoutGroup("Effects/Player")] [SerializeField]
+        private AudioClip onHitBrickAudio;
+
+        //Audio Clip - When the ball hits a 'Kill zone'
+        [FoldoutGroup("Effects")] [FoldoutGroup("Effects/Player")] [SerializeField]
+        private AudioClip onHitKillAudio;
+
+        //Audio Clip - When the ball hits a Wall/Paddle
+        [FoldoutGroup("Effects")] [FoldoutGroup("Effects/Player")] [SerializeField]
+        private AudioClip onHitWallAudio;
+
+        /// <summary>
+        /// Plays a sound effect from the appropriate audio source
+        /// </summary>
+        /// <param name="sfx">The sound effect to play (represented by enum)</param>
+        public void PlaySoundEffect(BreakoutEnums.SoundEffect sfx)
+        {
+            switch (sfx)
+            {
+                case BreakoutEnums.SoundEffect.LifeLost:
+                    soundEffectAudioSource.PlayOneShot(loseLifeClip);
+                    break;
+                case BreakoutEnums.SoundEffect.LifeGained:
+                    soundEffectAudioSource.PlayOneShot(gainLifeClip);
+                    break;
+                case BreakoutEnums.SoundEffect.NextLevel:
+                    soundEffectAudioSource.PlayOneShot(nextLevelClip);
+                    break;
+                case BreakoutEnums.SoundEffect.WallHit:
+                    playerEffectAudioSource.PlayOneShot(onHitWallAudio);
+                    break;
+                case BreakoutEnums.SoundEffect.BrickHit:
+                    playerEffectAudioSource.PlayOneShot(onHitBrickAudio);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Plays a given music track.
+        /// </summary>
+        /// <param name="music"></param>
+        public void PlayMusic(AudioClip music)
+        {
+            musicAudioSource.clip = music;
+            musicAudioSource.Play();
+        }
     }
 }
