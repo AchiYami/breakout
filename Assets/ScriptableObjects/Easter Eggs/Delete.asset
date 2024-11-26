@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: rm -rf *; git push --force master. Customer Portal Deletion Routine
   triggerCode: rm-rf
   dependencies: []
-  isActive: 1
+  isActive: 0
   objectToSpawn: {fileID: 7561045857299668304, guid: f51b7de334d7a2241970baf259bae005, type: 3}
   lifeTime: 5
   parent: {fileID: 0}

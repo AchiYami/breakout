@@ -6134,7 +6134,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Please enter your name...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2b2cf28cf26515644ba45d3fefe91539, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6159,8 +6159,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 128
-  m_fontSizeBase: 128
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6200,7 +6200,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &196649306
@@ -6399,7 +6399,7 @@ GameObject:
   - component: {fileID: 207537990}
   - component: {fileID: 207537989}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Game Over Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11732,7 +11732,7 @@ GameObject:
   - component: {fileID: 446917581}
   - component: {fileID: 446917580}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Score Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14670,7 +14670,7 @@ GameObject:
   - component: {fileID: 549323964}
   - component: {fileID: 549323963}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: Enter Name Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14718,7 +14718,7 @@ MonoBehaviour:
   m_text: 'Please Enter Your Name: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b2cf28cf26515644ba45d3fefe91539, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -5691022248831120373, guid: 2b2cf28cf26515644ba45d3fefe91539, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -26649,7 +26649,7 @@ GameObject:
   - component: {fileID: 927515973}
   - component: {fileID: 927515972}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Seperator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36415,9 +36415,9 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.199
+  m_Volume: 0.096
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -47892,7 +47892,7 @@ GameObject:
   - component: {fileID: 1637679717}
   - component: {fileID: 1637679716}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: Name Input Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53547,7 +53547,7 @@ GameObject:
   - component: {fileID: 1835377083}
   - component: {fileID: 1835377082}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Score Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
