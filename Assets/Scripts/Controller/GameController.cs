@@ -6,52 +6,82 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [FoldoutGroup("UI")] [SerializeField] private Transform lifeUpPosition;
-    [FoldoutGroup("UI")] [SerializeField] private GameObject lifeUpAlert;
-    [FoldoutGroup("Score")] public int score;
-    [FoldoutGroup("Score")] public TMP_Text scoreText;
+    //The position to spawn the Life Up Alert
+    [FoldoutGroup("UI")] [FoldoutGroup("UI/Alerts")] [SerializeField]
+    private Transform lifeUpPosition;
 
-    [FoldoutGroup("Score")] [SerializeField]
+    //The Life Up Alert Prefab
+    [FoldoutGroup("UI")] [FoldoutGroup("UI/Alerts")] [SerializeField]
+    private GameObject lifeUpAlert;
+
+    //UI that Displays the score
+    [FoldoutGroup("UI")] [FoldoutGroup("UI/Score")]
+    public TMP_Text scoreText;
+
+    //Leaderboard showing all scores
+    [FoldoutGroup("UI")] [FoldoutGroup("UI/Score")] [SerializeField]
     private Leaderboard leaderboard;
 
-    [FoldoutGroup("Prompts")] public StartPrompt startPrompt;
-    [FoldoutGroup("Prompts")] public GameOverPrompt endPrompt;
+    //The "Press to Start" Prompt
+    [FoldoutGroup("UI")] [FoldoutGroup("UI/Prompts")]
+    public StartPrompt startPrompt;
 
-    [FoldoutGroup("Lives")] public int lifeCount = 2;
+    //The Gme Over Prompt
+    [FoldoutGroup("UI")] [FoldoutGroup("UI/Prompts")]
+    public GameOverPrompt endPrompt;
 
-    [FoldoutGroup("Lives")] [SerializeField]
+    //How many lives the player currently has
+    [FoldoutGroup("Data")] [FoldoutGroup("Data/Lives")]
+    public int lifeCount = 2;
+
+    //Internal tracking of Life Indicator visuals
+    [FoldoutGroup("Data")] [FoldoutGroup("Data/Lives")] [SerializeField]
     private List<GameObject> lifeCounters;
 
-    [FoldoutGroup("levels")] [SerializeField]
+    //Which level are we curently on?
+    [FoldoutGroup("Data")] [FoldoutGroup("Data/Levels")] [SerializeField]
     private int currentLevel;
 
-    [FoldoutGroup(("levels"))] [SerializeField]
+    //The list of all levels
+    [FoldoutGroup("Data")] [FoldoutGroup("Data/Levels")] [SerializeField]
     private List<Level> levels;
 
-    [FoldoutGroup("Entities")] [SerializeField]
+    //Reference to the player paddle
+    [FoldoutGroup("Data")] [FoldoutGroup("Data/Player")] [SerializeField]
     private PlayerPaddle player;
 
-    [FoldoutGroup("Entities")] [SerializeField]
+    //Reference to the player ball
+    [FoldoutGroup("Data")] [FoldoutGroup("Data/Player")] [SerializeField]
     private Ball ball;
 
-    [FoldoutGroup("Options")] [SerializeField]
+    //Internal Tracking of Player's Score
+    [FoldoutGroup("Data")] [FoldoutGroup("Data/Player")]
+    public int score;
+
+    //Do we gain life via a score threshold?
+    [FoldoutGroup("Configuration")] [SerializeField]
     private bool gainLifeViaScore;
 
-    [FoldoutGroup("Options")] [SerializeField] [ShowIf(@"gainLifeViaScore")]
+    //The threshold in which we gain a life.
+    [FoldoutGroup("Configuration")] [SerializeField] [ShowIf(@"gainLifeViaScore")]
     private int gainLifeScoreThreshold;
 
-    [FoldoutGroup("Options")] [SerializeField]
+    //Do we gain a life by completing a level?
+    [FoldoutGroup("Configuration")] [SerializeField]
     private bool gainLifeViaLevelComplete;
 
-    [FoldoutGroup("MaxLevels")] [SerializeField]
+    //The maximum amount of lives a player can hold
+    [FoldoutGroup("Configuration")] [SerializeField]
     private int maxLives;
 
+    //The audio controller for music and sound effects.
     [FoldoutGroup("Audio")] [SerializeField]
     private AudioController audioController;
 
 
     private void Start()
     {
+        //Subscribe to Events
         EventController.OnBrickDestroyed += IncreaseScore;
         EventController.GameStart += GameStart;
         EventController.LifeEnd += OnLifeEnd;
@@ -59,12 +89,14 @@ public class GameController : MonoBehaviour
         EventController.GameOver += GameOver;
         EventController.NextLevel += NextLevel;
 
+        //Start at the first level
         currentLevel = 0;
         ActivateCurrentLevel();
     }
 
     private void OnDestroy()
     {
+        //Unsubscribe from events
         EventController.OnBrickDestroyed -= IncreaseScore;
         EventController.GameStart -= GameStart;
         EventController.LifeEnd -= OnLifeEnd;
@@ -209,18 +241,24 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void GameRestart()
     {
+        //Reset Lives
         lifeCount = 3;
         RefreshLifeCounterVisuals();
+        
+        //Reset Score
         score = 0;
         scoreText.SetText("0");
 
+        //Reset Player
         player.ResetPaddle();
         ball.ResetBall();
 
+        //Reset UI
         leaderboard.gameObject.SetActive(false);
         startPrompt.gameObject.SetActive(true);
         endPrompt.gameObject.SetActive(false);
 
+        //Reset Level
         currentLevel = 0;
         ActivateCurrentLevel();
     }
