@@ -43,6 +43,10 @@ public class GameController : MonoBehaviour
     [FoldoutGroup("Audio")] [SerializeField]
     private AudioClip gainLifeClip;
 
+    [FoldoutGroup("Audio")] [SerializeField]
+    private AudioClip loseLifeClip;
+
+
     [FoldoutGroup("Options")] [SerializeField]
     private bool gainLifeViaScore;
 
@@ -128,12 +132,12 @@ public class GameController : MonoBehaviour
 
     private void GainLife()
     {
-        audioSource.PlayOneShot(gainLifeClip);
         if (LifeCount < maxLives)
         {
+            audioSource.PlayOneShot(gainLifeClip);
             Instantiate(lifeUpAlert, lifeUpPosition.position, Quaternion.identity, lifeUpPosition);
             LifeCount++;
-            lifeCounters[LifeCount].SetActive(true);
+            RefreshLifeCounterVisuals();
         }
     }
 
@@ -163,6 +167,10 @@ public class GameController : MonoBehaviour
 
     private void OnLifeEnd()
     {
+        audioSource.PlayOneShot(loseLifeClip);
+        LifeCount--;
+        RefreshLifeCounterVisuals();
+
         if (LifeCount <= 0)
         {
             endPrompt.GameOver(Score);
@@ -170,18 +178,13 @@ public class GameController : MonoBehaviour
         else
         {
             startPrompt.OnLifeEnd();
-
-            LifeCount--;
-            for (var i = 0; i < lifeCounters.Count; i++)
-            {
-                lifeCounters[i]?.SetActive(i <= LifeCount);
-            }
         }
     }
 
     public void GameRestart()
     {
-        LifeCount = 2;
+        LifeCount = 3;
+        RefreshLifeCounterVisuals();
         Score = 0;
         scoreText.SetText("0");
 
@@ -194,5 +197,13 @@ public class GameController : MonoBehaviour
 
         currentLevel = 0;
         ActivateCurrentLevel();
+    }
+
+    private void RefreshLifeCounterVisuals()
+    {
+        for (var i = 0; i < lifeCounters.Count; i++)
+        {
+            lifeCounters[i]?.SetActive(i < LifeCount);
+        }
     }
 }
