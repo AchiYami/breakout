@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [FoldoutGroup("UI")] [SerializeField] private Transform lifeUpPosition;
+    [FoldoutGroup("UI")] [SerializeField] private GameObject lifeUpAlert;
     [FoldoutGroup("Score")] public int Score;
     [FoldoutGroup("Score")] public TMP_Text scoreText;
 
     [FoldoutGroup("Score")] [SerializeField]
     private Leaderboard leaderboard;
-
 
     [FoldoutGroup("Prompts")] public StartPrompt startPrompt;
     [FoldoutGroup("Prompts")] public GameOverPrompt endPrompt;
@@ -32,6 +33,27 @@ public class GameController : MonoBehaviour
 
     [FoldoutGroup("Entities")] [SerializeField]
     private Ball ball;
+
+    [FoldoutGroup("Audio")] [SerializeField]
+    private AudioSource audioSource;
+
+    [FoldoutGroup("Audio")] [SerializeField]
+    private AudioClip nextLevelClip;
+
+    [FoldoutGroup("Audio")] [SerializeField]
+    private AudioClip gainLifeClip;
+
+    [FoldoutGroup("Options")] [SerializeField]
+    private bool gainLifeViaScore;
+
+    [FoldoutGroup("Options")] [SerializeField] [ShowIf(@"gainLifeViaScore")]
+    private int gainLifeScoreThreshold;
+
+    [FoldoutGroup("Options")] [SerializeField]
+    private bool gainLifeViaLevelComplete;
+
+    [FoldoutGroup("MaxLevels")] [SerializeField]
+    private int maxLives;
 
 
     private void Start()
@@ -61,6 +83,12 @@ public class GameController : MonoBehaviour
     {
         Score += 100;
         scoreText.SetText(Score.ToString());
+
+
+        if (gainLifeViaScore && (Score % gainLifeScoreThreshold == 0))
+        {
+            GainLife();
+        }
     }
 
     private void GameStart()
@@ -94,21 +122,37 @@ public class GameController : MonoBehaviour
         {
             levels[i].gameObject.SetActive(i == currentLevel);
         }
-        
+
         levels[currentLevel].Reset();
-        
+    }
+
+    private void GainLife()
+    {
+        audioSource.PlayOneShot(gainLifeClip);
+        if (LifeCount < maxLives)
+        {
+            Instantiate(lifeUpAlert, lifeUpPosition.position, Quaternion.identity, lifeUpPosition);
+            LifeCount++;
+            lifeCounters[LifeCount].SetActive(true);
+        }
     }
 
     private void NextLevel()
     {
-        currentLevel++;
+        if (gainLifeViaLevelComplete)
+        {
+            GainLife();
+        }
 
+        currentLevel++;
+        audioSource.PlayOneShot(nextLevelClip);
         ball.ResetBall();
         player.ResetPaddle();
 
         if (currentLevel >= levels.Count)
         {
             //Game Complete
+            GameOver();
         }
         else
         {
@@ -130,7 +174,6 @@ public class GameController : MonoBehaviour
             LifeCount--;
             for (var i = 0; i < lifeCounters.Count; i++)
             {
-                print($"Life Counter is now {LifeCount}, Setting {i} to {i <= LifeCount}");
                 lifeCounters[i]?.SetActive(i <= LifeCount);
             }
         }

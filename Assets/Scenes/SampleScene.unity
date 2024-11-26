@@ -2780,6 +2780,7 @@ RectTransform:
   - {fileID: 1780791854}
   - {fileID: 970568385}
   - {fileID: 301136013}
+  - {fileID: 578923243}
   m_Father: {fileID: 2097867878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -15938,6 +15939,41 @@ MonoBehaviour:
   scoreEntryPrefab: {fileID: 3385164782998822634, guid: cd3c3357a3810a6418255598a9d05fb4, type: 3}
   scoreEntries: []
   content: {fileID: 1210719887}
+--- !u!1 &578923242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 578923243}
+  m_Layer: 5
+  m_Name: LifeUpAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &578923243
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578923242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 104509603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -677}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &584982837
 GameObject:
   m_ObjectHideFlags: 0
@@ -20993,6 +21029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae8fda68565b541847a8a03d42ee70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeUpPosition: {fileID: 578923243}
+  lifeUpAlert: {fileID: 911042444086344273, guid: 6e6f3a587b0820348b8b7909b9df314d, type: 3}
   Score: 0
   scoreText: {fileID: 764337087}
   leaderboard: {fileID: 575637981}
@@ -21012,6 +21050,13 @@ MonoBehaviour:
   - {fileID: 1604126803}
   player: {fileID: 8241426582169696540}
   ball: {fileID: 263683077}
+  audioSource: {fileID: 754523591}
+  nextLevelClip: {fileID: 8300000, guid: 3673ba85e885cb7409a9ce935c44a565, type: 3}
+  gainLifeClip: {fileID: 8300000, guid: 8589cc4f20dc5d245bc78e1b5b6e7ffb, type: 3}
+  gainLifeViaScore: 1
+  gainLifeScoreThreshold: 2000
+  gainLifeViaLevelComplete: 1
+  maxLives: 2
 --- !u!82 &754523591
 AudioSource:
   m_ObjectHideFlags: 0
@@ -33604,7 +33649,7 @@ GameObject:
   - component: {fileID: 1182909429}
   m_Layer: 0
   m_Name: Ceiling
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
