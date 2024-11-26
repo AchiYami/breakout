@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2173626ad0c7334cba963665406c495, type: 3}
+  m_Name: BigDog
+  m_EditorClassIdentifier: 
+  displayName: Big Dog
+  triggerCode: bigdog
+  dependencies:
+  - {fileID: 0}
+  isActive: 0
+  ball: {fileID: 0}
+  ballNormalImage: {fileID: 21300000, guid: 2486f7158cd5ef04c925c908475c7827, type: 3}
+  ballEggImage: {fileID: 21300000, guid: 84614f76010c2374fb8077f33945f966, type: 3}

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public class Ball : MonoBehaviour
 {
     //Physics - Rigidbody 2D 
-    [SerializeField] private Rigidbody2D rb2d;
+    [SerializeField] private Rigidbody2D ballRigidBody;
 
     //The initial 'kick' provided to the ball on game start
     [SerializeField] private float initialForce;
@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         //Get Components
-        rb2d = GetComponent<Rigidbody2D>();
+        ballRigidBody = GetComponent<Rigidbody2D>();
 
         //Event Subscription
         EventController.GameStart += GameStart;
@@ -41,7 +41,7 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         //Movement
-        rb2d.linearVelocity = rb2d.linearVelocity.normalized * speed;
+        ballRigidBody.linearVelocity = ballRigidBody.linearVelocity.normalized * speed;
     }
 
     /// <summary>
@@ -54,7 +54,7 @@ public class Ball : MonoBehaviour
         //Apply upwards direction
         var upwardsVelocity = new Vector2(angle, 1);
         //Hit the ball
-        rb2d.AddForce(upwardsVelocity * initialForce, ForceMode2D.Impulse);
+        ballRigidBody.AddForce(upwardsVelocity * initialForce, ForceMode2D.Impulse);
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public class Ball : MonoBehaviour
     public void ResetBall()
     {
         //Stop movement
-        rb2d.linearVelocity = Vector2.zero;
+        ballRigidBody.linearVelocity = Vector2.zero;
         //Reset position
         transform.position = _initialPosition;
     }

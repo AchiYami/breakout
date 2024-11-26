@@ -1,86 +1,119 @@
 using System.Collections;
+using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
-public class Alert : MonoBehaviour
+namespace Entities
 {
-    //Internal Timer for lifetime
-    private float _timer;
-    
-    //Is the alert active/flashing?
-    private bool _active;
-
-    //The speed at which the prompt travels
-    [SerializeField] private float speed;
-
-    //How long the prompt should show 
-    [SerializeField] private float lifeTime;
-    
-    //Fade Controls
-    [SerializeField] private CanvasGroup cg;
-    [SerializeField] private float fadeSpeed;
- 
-    //Internal tracking of the alpha of the alert
-    private float colorAlpha;
-
-    private void Start()
+    public class Alert : MonoBehaviour
     {
-        _timer = 0f;
-        _active = true;
-        colorAlpha = 1;
-        StartCoroutine(Flash());
-    }
+        //Internal Timer for lifetime
+        private float _timer;
 
-    void Update()
-    {
-        //Movement
-        transform.Translate(Vector3.up * (speed * Time.deltaTime));
-        _timer += Time.deltaTime;
-        
-        //Lifetime Tracking - Set to Fadeout
-        if (_timer >= lifeTime && _active)
+        //Is the alert active/flashing?
+        private bool _active;
+
+        //The speed at which the prompt travels
+        [FoldoutGroup("Options")] [SerializeField]
+        private float speed;
+
+        //How long the prompt should show 
+        [FoldoutGroup("Options")] [SerializeField]
+        private float lifeTime;
+
+        //Fade Controls
+        [FoldoutGroup("Components")] [SerializeField]
+        private CanvasGroup cg;
+
+        [FoldoutGroup("Options")] [SerializeField]
+        private float fadeSpeed;
+
+        //Text content of the Alert;
+        [FoldoutGroup("Components")] [SerializeField]
+        private TMP_Text text;
+
+        //Internal tracking of the alpha of the alert
+        private float colorAlpha;
+
+        private void Start()
         {
-            _active = false;
-            StopAllCoroutines();
-            StartCoroutine(FadeOut());
+            _timer = 0f;
+            _active = true;
+            colorAlpha = 1;
+            StartCoroutine(Flash());
         }
-    }
 
-/// <summary>
-/// Flashes the Prompt
-/// </summary>
-/// <returns></returns>
-    private IEnumerator Flash()
-    {
-        var direction = false;
-        while (_active)
+        void Update()
         {
-            if (direction)
+            //Movement
+            transform.Translate(Vector3.up * (speed * Time.deltaTime));
+            _timer += Time.deltaTime;
+
+            //Lifetime Tracking - Set to Fadeout
+            if (_timer >= lifeTime && _active)
             {
-                colorAlpha -= fadeSpeed * Time.deltaTime;
-                if (colorAlpha <= 0.4) direction = false;
+                _active = false;
+                StopAllCoroutines();
+                StartCoroutine(FadeOut());
             }
-            else
-            {
-                colorAlpha += fadeSpeed * Time.deltaTime;
-                if (colorAlpha >= 1) direction = true;
-            }
-            cg.alpha = colorAlpha;
-            yield return new WaitForEndOfFrame();
         }
-    }
 
-/// <summary>
-/// Fade the prompt out completely and then destroy it.
-/// </summary>
-/// <returns></returns>
-    private IEnumerator FadeOut()
-    {
-        while (cg.alpha > 0)
+        /// <summary>
+        /// Sets the Text Content of the Alert
+        /// </summary>
+        /// <param name="newText">The content to display</param>
+        public void SetText(string newText)
         {
-            cg.alpha = Mathf.MoveTowards(cg.alpha, 0, Time.deltaTime * fadeSpeed);
-            yield return new WaitForEndOfFrame();
+            text.SetText(newText);
         }
 
-        Destroy(gameObject);
+        /// <summary>
+        /// Set the colour of the Alert's text
+        /// </summary>
+        /// <param name="colour">The colour to display</param>
+        public void SetColour(Color colour)
+        {
+            text.color = colour;
+        }
+
+        /// <summary>
+        /// Flashes the Prompt
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator Flash()
+        {
+            var direction = false;
+            while (_active)
+            {
+                if (direction)
+                {
+                    colorAlpha -= fadeSpeed * Time.deltaTime;
+                    if (colorAlpha <= 0.4) direction = false;
+                }
+                else
+                {
+                    colorAlpha += fadeSpeed * Time.deltaTime;
+                    if (colorAlpha >= 1) direction = true;
+                }
+
+                cg.alpha = colorAlpha;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        /// <summary>
+        /// Fade the prompt out completely and then destroy it.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator FadeOut()
+        {
+            while (cg.alpha > 0)
+            {
+                cg.alpha = Mathf.MoveTowards(cg.alpha, 0, Time.deltaTime * fadeSpeed);
+                yield return new WaitForEndOfFrame();
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

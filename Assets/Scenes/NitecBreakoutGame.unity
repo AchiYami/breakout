@@ -2521,6 +2521,41 @@ MonoBehaviour:
   - {fileID: 1576402807}
   levelMusic: {fileID: 8300000, guid: e2e22804bab9d824892a4f98536da49a, type: 3}
   BricksRemaining: 0
+--- !u!1 &101224439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 101224440}
+  m_Layer: 5
+  m_Name: Blackout Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &101224440
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101224439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 104509603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &101225811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,6 +2817,9 @@ RectTransform:
   - {fileID: 970568385}
   - {fileID: 301136013}
   - {fileID: 578923243}
+  - {fileID: 101224440}
+  - {fileID: 935996324}
+  - {fileID: 731599813}
   m_Father: {fileID: 2097867878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7413,7 +7451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ccbe9694504d42b58e2bce6c3ca7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: 263683079}
+  ballRigidBody: {fileID: 263683079}
   initialForce: 1
   speed: 12
   audioController: {fileID: 1239841781}
@@ -7452,7 +7490,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.65
 --- !u!50 &263683079
 Rigidbody2D:
   serializedVersion: 5
@@ -7523,8 +7561,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_SortingOrder: 25
+  m_Sprite: {fileID: 21300000, guid: 2486f7158cd5ef04c925c908475c7827, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -20151,6 +20189,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &731599812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 731599813}
+  m_Layer: 5
+  m_Name: JumbotronAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &731599813
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731599812}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 104509603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2009, y: 672}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &733836639
 GameObject:
   m_ObjectHideFlags: 0
@@ -20983,6 +21056,7 @@ GameObject:
   - component: {fileID: 754523589}
   - component: {fileID: 754523590}
   - component: {fileID: 754523591}
+  - component: {fileID: 754523592}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -21030,7 +21104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeUpPosition: {fileID: 578923243}
   lifeUpAlert: {fileID: 911042444086344273, guid: 6e6f3a587b0820348b8b7909b9df314d, type: 3}
-  score: 0
   scoreText: {fileID: 764337087}
   leaderboard: {fileID: 575637981}
   startPrompt: {fileID: 1780791857}
@@ -21049,6 +21122,7 @@ MonoBehaviour:
   - {fileID: 1604126803}
   player: {fileID: 8241426582169696540}
   ball: {fileID: 263683077}
+  score: 0
   gainLifeViaScore: 1
   gainLifeScoreThreshold: 2000
   gainLifeViaLevelComplete: 1
@@ -21151,6 +21225,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &754523592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754523588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a2c1ffa34e24a49a4ad015502d6e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastInputString: 
+  isListenining: 0
+  eggs:
+  - {fileID: 11400000, guid: 02d901e36e45cf64ea736c47d9d3d0e6, type: 2}
+  - {fileID: 11400000, guid: 3bd2df83b90594646a0d2cb935ceb7ae, type: 2}
+  - {fileID: 11400000, guid: b0afcc366938d6c49b6034697b533dec, type: 2}
+  eggAlert: {fileID: 911042444086344273, guid: 6e6f3a587b0820348b8b7909b9df314d, type: 3}
+  eggAlertAnchor: {fileID: 935996323}
 --- !u!1 &754880661
 GameObject:
   m_ObjectHideFlags: 0
@@ -26970,6 +27064,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &935996323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935996324}
+  m_Layer: 5
+  m_Name: EasterEggAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &935996324
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935996323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 104509603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 744, y: -677}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &944018121
 GameObject:
   m_ObjectHideFlags: 0
