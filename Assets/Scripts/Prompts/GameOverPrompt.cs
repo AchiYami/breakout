@@ -1,51 +1,72 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameOverPrompt : MonoBehaviour
 {
-    private Keyboard _keyboard;
 
+    //Text to display the final score
     [SerializeField] private TMP_Text scoreText;
+    
+    //Button to allow for score submission
     [SerializeField] private Button submitButton;
+    
+    //Input field for Player name
     [SerializeField] private TMP_InputField nameInputField;
 
+    //Leaderboard - displays all scores
     [SerializeField] private Leaderboard leaderboard;
 
-
-    private int gameOverScore;
-    private string gameOverName;
+    //Internal tracking of Score & Name
+    private int _gameOverScore;
+    private string _gameOverName;
 
     public void Start()
     {
-        _keyboard = Keyboard.current;
+        //Hide the Game Over Prompt immediate
         gameObject.SetActive(false);
-
-        submitButton.onClick.AddListener(() => SubmitScore(gameOverName, gameOverScore));
+        
+        //Create input listeners
+        submitButton.onClick.AddListener(() => SubmitScore(_gameOverName, _gameOverScore));
         nameInputField.onEndEdit.AddListener(UpdateName);
     }
 
-    private void UpdateName(string name)
+    /// <summary>
+    /// Updates the Name of the Player
+    /// </summary>
+    /// <param name="playerName">The Name of the Player</param>
+    private void UpdateName(string playerName)
     {
-        gameOverName = name;
+        _gameOverName = playerName;
     }
 
+    /// <summary>
+    /// Game Over Logic
+    /// </summary>
+    /// <param name="score">The final score of the player</param>
     public void GameOver(int score)
     {
+        //Show Game Over Prompt
         gameObject.SetActive(true);
+        
+        //Set the Score 
         scoreText.SetText(score.ToString());
-        gameOverScore = score;
+        _gameOverScore = score;
+        
+        //Show the Input Fields
         submitButton.gameObject.SetActive(true);
         nameInputField.text = "";
         nameInputField.gameObject.SetActive(true);
     }
 
-    private void SubmitScore(string name, int score)
+    /// <summary>
+    /// Submits the Score, and shows the Leaderboard.
+    /// </summary>
+    /// <param name="playerName">The Player's name.</param>
+    /// <param name="score">The Player's final score.</param>
+    private void SubmitScore(string playerName, int score)
     {
-        leaderboard.SubmitScore(name, score);
-
+        leaderboard.SubmitScore(playerName, score);
         submitButton.gameObject.SetActive(false);
         nameInputField.gameObject.SetActive(false);
     }

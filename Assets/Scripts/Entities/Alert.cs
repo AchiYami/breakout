@@ -1,19 +1,25 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class Alert : MonoBehaviour
 {
+    //Internal Timer for lifetime
     private float _timer;
+    
+    //Is the alert active/flashing?
     private bool _active;
 
+    //The speed at which the prompt travels
     [SerializeField] private float speed;
 
+    //How long the prompt should show 
     [SerializeField] private float lifeTime;
+    
+    //Fade Controls
     [SerializeField] private CanvasGroup cg;
     [SerializeField] private float fadeSpeed;
-    [SerializeField] private TMP_Text text;
-
+ 
+    //Internal tracking of the alpha of the alert
     private float colorAlpha;
 
     private void Start()
@@ -26,9 +32,11 @@ public class Alert : MonoBehaviour
 
     void Update()
     {
+        //Movement
         transform.Translate(Vector3.up * (speed * Time.deltaTime));
         _timer += Time.deltaTime;
         
+        //Lifetime Tracking - Set to Fadeout
         if (_timer >= lifeTime && _active)
         {
             _active = false;
@@ -37,7 +45,10 @@ public class Alert : MonoBehaviour
         }
     }
 
-
+/// <summary>
+/// Flashes the Prompt
+/// </summary>
+/// <returns></returns>
     private IEnumerator Flash()
     {
         var direction = false;
@@ -58,6 +69,10 @@ public class Alert : MonoBehaviour
         }
     }
 
+/// <summary>
+/// Fade the prompt out completely and then destroy it.
+/// </summary>
+/// <returns></returns>
     private IEnumerator FadeOut()
     {
         while (cg.alpha > 0)
