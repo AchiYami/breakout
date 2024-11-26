@@ -5,3 +5,4 @@ obj
 *.csproj
 .idea
 Assets/Plugins
+UserSettings
