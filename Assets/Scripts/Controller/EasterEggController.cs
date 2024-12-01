@@ -51,8 +51,6 @@ namespace Controller
 
         void ProcessEasterEgg()
         {
-            print(lastInputString);
-
             foreach (var egg in eggs)
             {
                 if (lastInputString.ToLower() == egg.triggerCode)
