@@ -2532,7 +2532,7 @@ GameObject:
   - component: {fileID: 101224440}
   m_Layer: 5
   m_Name: Blackout Anchor
-  m_TagString: Untagged
+  m_TagString: BlackoutAnchor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20200,7 +20200,7 @@ GameObject:
   - component: {fileID: 731599813}
   m_Layer: 5
   m_Name: JumbotronAnchor
-  m_TagString: Untagged
+  m_TagString: JumbotronAnchor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

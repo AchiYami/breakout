@@ -13,6 +13,11 @@ namespace Utilities
 
         private Jumbotron _currentJumbo;
 
+        public override void Initialize()
+        {
+            isActive = false;
+        }
+
         protected override void Activate()
         {
             if (_currentJumbo != null)
@@ -20,10 +25,14 @@ namespace Utilities
                 Destroy(_currentJumbo.gameObject);
             }
 
+            jumboStartPoint = GameObject.FindGameObjectWithTag("JumbotronAnchor");
+
             isActive = true;
+
 
             _currentJumbo = Instantiate(jumboPrefab, jumboStartPoint.transform).GetComponent<Jumbotron>();
             _currentJumbo.SetData(text, lifeTime, speed);
+
         }
 
         protected override void Deactivate()
@@ -35,5 +44,6 @@ namespace Utilities
 
             isActive = false;
         }
+        
     }
 }

@@ -10,9 +10,16 @@ namespace Utilities
 
         [SerializeField] private Transform parent;
 
+        public override void Initialize()
+        {
+            isActive = false;
+        }
+        
         protected override void Activate()
         {
             isActive = true;
+
+            parent = GameObject.FindGameObjectWithTag("BlackoutAnchor").transform;
 
             var newObject = Instantiate(objectToSpawn, parent);
             Destroy(newObject, lifeTime);

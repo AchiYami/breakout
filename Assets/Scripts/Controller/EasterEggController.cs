@@ -22,6 +22,12 @@ namespace Controller
         {
             isListenining = false;
             _keyboard = Keyboard.current;
+
+            foreach (EasterEgg egg in eggs)
+            {
+                egg.Initialize();
+            }
+            
         }
 
         // Update is called once per frame

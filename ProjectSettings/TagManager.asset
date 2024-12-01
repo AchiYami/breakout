@@ -8,6 +8,8 @@ TagManager:
   - KillBox
   - Wall
   - Brick
+  - BlackoutAnchor
+  - JumbotronAnchor
   layers:
   - Default
   - TransparentFX

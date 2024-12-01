@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Innovative Web Design
   triggerCode: webdesign
   dependencies: []
-  isActive: 0
+  isActive: 1
   jumboPrefab: {fileID: 5496090305460494992, guid: 792a02997e299294fb0e27c37f8964f9, type: 3}
   jumboStartPoint: {fileID: 0}
   lifeTime: 10

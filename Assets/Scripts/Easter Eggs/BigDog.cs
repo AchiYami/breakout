@@ -9,6 +9,11 @@ namespace Utilities
         [SerializeField] private Sprite ballNormalImage;
         [SerializeField] private Sprite ballEggImage;
 
+        public override void Initialize()
+        {
+            isActive = false;
+        }
+
         protected override void Activate()
         {
             if (ball == null)

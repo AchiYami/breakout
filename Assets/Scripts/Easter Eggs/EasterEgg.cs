@@ -11,7 +11,7 @@ namespace Utilities
         public string triggerCode;
         public List<GameObject> dependencies;
         public bool isActive;
-
+        
         public void Trigger()
         {
             if (isActive)
@@ -23,6 +23,8 @@ namespace Utilities
                 Activate();
             }
         }
+
+        public abstract void Initialize();
         protected abstract void Activate();
         protected abstract void Deactivate();
     }
