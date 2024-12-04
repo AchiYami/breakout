@@ -1,5 +1,7 @@
+using System;
 using Controller;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
@@ -18,6 +20,13 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private AudioController audioController;
 
+    //Keeps a track of if the ball should be active or not.
+    private bool _isActive;
+
+    //Input references
+    private Keyboard _keyboard;
+    private Gamepad _gamepad;
+
     private void Start()
     {
         //Get Components
@@ -29,6 +38,10 @@ public class Ball : MonoBehaviour
 
         //Track initial position
         _initialPosition = transform.position;
+
+        //Grab the current input devices
+        _keyboard = Keyboard.current;
+        _gamepad = Gamepad.current;
     }
 
     private void OnDestroy()
@@ -38,10 +51,39 @@ public class Ball : MonoBehaviour
         EventController.LifeEnd -= ResetBall;
     }
 
+    private void Update()
+    {
+        //Reset the Game in case of bad ball stuck - keyboard.
+        if (_keyboard.rKey.wasPressedThisFrame)
+        {
+            ResetBall();
+            GameStart();
+        }
+
+        //Reset the Game through the gamepad - in case of ball stuck.
+        if (_gamepad != null && _gamepad.selectButton.wasPressedThisFrame)
+        {
+            ResetBall();
+            GameStart();
+        }
+    }
+
     private void FixedUpdate()
     {
         //Movement
         ballRigidBody.linearVelocity = ballRigidBody.linearVelocity.normalized * speed;
+
+        //Prevent ball from freezing in the X Axis
+        if (_isActive && ballRigidBody.linearVelocityX is < 1f and > -1f)
+        {
+            ballRigidBody.linearVelocityX = 1f;
+        }
+
+        //Prevent ball from freezing in the Y Axis
+        if (_isActive && ballRigidBody.linearVelocityY is < 1 and > -1f)
+        {
+            ballRigidBody.linearVelocityY = 1f;
+        }
     }
 
     /// <summary>
@@ -55,6 +97,8 @@ public class Ball : MonoBehaviour
         var upwardsVelocity = new Vector2(angle, 1);
         //Hit the ball
         ballRigidBody.AddForce(upwardsVelocity * initialForce, ForceMode2D.Impulse);
+        //Set the ball to active.
+        _isActive = true;
     }
 
     /// <summary>
@@ -66,6 +110,8 @@ public class Ball : MonoBehaviour
         ballRigidBody.linearVelocity = Vector2.zero;
         //Reset position
         transform.position = _initialPosition;
+        //Set the ball to inactive.
+        _isActive = false;
     }
 
     /// <summary>
