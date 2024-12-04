@@ -3,6 +3,7 @@ using Controller;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
@@ -78,6 +79,8 @@ public class GameController : MonoBehaviour
     [FoldoutGroup("Audio")] [SerializeField]
     private AudioController audioController;
 
+    //Reference to Keyboard
+    private Keyboard _keyboard;
 
     private void Start()
     {
@@ -88,6 +91,9 @@ public class GameController : MonoBehaviour
         EventController.GameReset += GameReset;
         EventController.GameOver += GameOver;
         EventController.NextLevel += NextLevel;
+
+        //Grab the current Keyboard
+        _keyboard = Keyboard.current;
 
         //Start at the first level
         currentLevel = 0;
@@ -244,7 +250,7 @@ public class GameController : MonoBehaviour
         //Reset Lives
         lifeCount = 3;
         RefreshLifeCounterVisuals();
-        
+
         //Reset Score
         score = 0;
         scoreText.SetText("0");
@@ -271,6 +277,38 @@ public class GameController : MonoBehaviour
         for (var i = 0; i < lifeCounters.Count; i++)
         {
             lifeCounters[i]?.SetActive(i < lifeCount);
+        }
+    }
+
+    //Debug Update to allow for on demand level switching
+    private void Update()
+    {
+        if (_keyboard.digit1Key.wasPressedThisFrame)
+        {
+            GameRestart();
+            currentLevel = 0;
+            ActivateCurrentLevel();
+        }
+
+        if (_keyboard.digit2Key.wasPressedThisFrame)
+        {
+            GameRestart();
+            currentLevel = 1;
+            ActivateCurrentLevel();
+        }
+
+        if (_keyboard.digit3Key.wasPressedThisFrame)
+        {
+            GameRestart();
+            currentLevel = 2;
+            ActivateCurrentLevel();
+        }
+
+        if (_keyboard.digit4Key.wasPressedThisFrame)
+        {
+            GameRestart();
+            currentLevel = 3;
+            ActivateCurrentLevel();
         }
     }
 }
